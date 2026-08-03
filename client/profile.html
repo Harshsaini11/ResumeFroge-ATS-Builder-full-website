@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - ResumeForge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <script src="js/auth.js"></script>
+    <script>protectIndexPage();</script>
+    <style>
+        .btn-profile-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff !important;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13.5px;
+            text-decoration: none;
+            letter-spacing: -0.2px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-profile-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-profile-nav:hover::before {
+            left: 100%;
+        }
+
+        .btn-profile-nav:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-profile-nav:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-profile-nav .profile-icon {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .profile-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .profile-avatar-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            object-fit: cover;
+            border: 3px solid #ffffff;
+        }
+
+        .avatar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .profile-avatar-wrapper:hover .avatar-overlay {
+            opacity: 1;
+        }
+
+        .profile-info h2 {
+            margin: 0 0 5px 0;
+            color: #0f172a;
+            font-size: 24px;
+        }
+
+        .profile-info p {
+            margin: 0 0 12px 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .badge-pill {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .profile-actions-container {
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-change-pass {
+            background: #f1f5f9;
+            color: #0f172a;
+            border: 1px solid #cbd5e1;
+            padding: 8px 14px;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-change-pass:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-logout {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 8px 14px;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: #fecaca;
+        }
+
+        .resume-history-section {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .resume-history-section h3 {
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 18px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resume-item-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .resume-details h4 {
+            margin: 0 0 4px 0;
+            color: #1e293b;
+            font-size: 15px;
+        }
+
+        .resume-details span {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .btn-view {
+            background: #2563eb;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+
+        .no-resumes {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            padding: 25px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="brand-icon">⚡</span>
+                <div class="brand-text">
+                    <h1>ResumeForge</h1>
+                    <p>Dynamic & ATS-Friendly Resume Builder</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="index.html" class="auth-btn" style="padding: 8px 16px; text-decoration: none; font-size: 13px;">🏠 Builder Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="profile-wrapper">
+        <!-- USER PROFILE CARD -->
+        <div class="profile-card">
+            <div class="profile-avatar-wrapper" onclick="document.getElementById('avatar-input').click()">
+                <div id="avatar-display" class="profile-avatar">U</div>
+                <div class="avatar-overlay">
+                    <span style="font-size: 18px;">📷</span>
+                    <span>Change</span>
+                </div>
+                <input type="file" id="avatar-input" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+            </div>
+
+            <div class="profile-info">
+                <h2 id="profile-name">User Account</h2>
+                <p id="profile-email">user@gmail.com</p>
+                <span class="badge-pill" id="profile-resume-count">0 Resumes Created</span>
+            </div>
+
+            <div class="profile-actions-container">
+                <button class="btn-change-pass" onclick="openPassModal()">🔑 Change Password</button>
+                <button class="btn-logout" onclick="handleLogout()">🚪 Log Out</button>
+            </div>
+        </div>
+
+        <!-- RESUME HISTORY SECTION -->
+        <div class="resume-history-section">
+            <h3>
+                <span>📂 Your Resume History</span>
+                <a href="index.html" style="font-size: 13px; color: #2563eb; text-decoration: none;">+ Create New Resume</a>
+            </h3>
+            
+            <div id="resume-list-container">
+                <div class="no-resumes">Loading saved resumes...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHANGE PASSWORD MODAL POP-UP -->
+    <div id="change-pass-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin:0; color: #0f172a; font-size: 18px;">🔑 Change Password</h3>
+                <span onclick="closePassModal()" style="cursor: pointer; font-size: 20px; font-weight: bold; color: #64748b;">&times;</span>
+            </div>
+
+            <form id="change-pass-form">
+                <div class="auth-group">
+                    <label>Current Password *</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="curr-pass" class="auth-input" placeholder="Enter current password" required>
+                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('curr-pass', this)">👁️</span>
+                    </div>
+                </div>
+
+                <div class="auth-group">
+                    <label>New Password *</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="new-pass" class="auth-input" placeholder="Min 8 chars (e.g. Pass@123)" required>
+                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('new-pass', this)">👁️</span>
+                    </div>
+                </div>
+
+                <div class="auth-group">
+                    <label>Confirm New Password *</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="confirm-new-pass" class="auth-input" placeholder="Re-enter new password" required>
+                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('confirm-new-pass', this)">👁️</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn-change-pass" style="flex: 1;" onclick="closePassModal()">Cancel</button>
+                    <button type="submit" id="save-pass-btn" class="auth-btn" style="flex: 1; margin: 0;">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const localName = localStorage.getItem('userName') || 'User Account';
+            const localEmail = localStorage.getItem('userEmail') || 'user@gmail.com';
+            const savedAvatar = localStorage.getItem('userAvatar');
+
+            document.getElementById('profile-name').innerText = localName;
+            document.getElementById('profile-email').innerText = localEmail;
+            
+            renderAvatar(savedAvatar, localName);
+
+            const token = localStorage.getItem('authToken');
+            if (!token) return;
+
+            try {
+                const apiBase = window.API_BASE || 'http://127.0.0.1:5000/api';
+                const response = await fetch(`${apiBase}/auth/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const user = data.user;
+                    
+                    document.getElementById('profile-name').innerText = user.fullName || localName;
+                    document.getElementById('profile-email').innerText = user.email || localEmail;
+                    document.getElementById('profile-resume-count').innerText = `${data.totalResumes || 0} Resumes Created`;
+                    
+                    localStorage.setItem('userName', user.fullName);
+                    localStorage.setItem('userEmail', user.email);
+
+                    // Restore picture from MongoDB if available
+                    if (user.avatar) {
+                        localStorage.setItem('userAvatar', user.avatar);
+                        renderAvatar(user.avatar, user.fullName);
+                    } else if (savedAvatar) {
+                        renderAvatar(savedAvatar, user.fullName);
+                    } else {
+                        renderAvatar(null, user.fullName);
+                    }
+
+                    renderResumeHistory(data.resumes || []);
+                }
+            } catch (err) {
+                renderResumeHistory([]);
+            }
+        });
+
+        function renderAvatar(photoUrl, fullName) {
+            const avatarDisplay = document.getElementById('avatar-display');
+            if (photoUrl && photoUrl.trim() !== '') {
+                avatarDisplay.innerHTML = `<img src="${photoUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                const name = fullName || 'User Account';
+                const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                avatarDisplay.innerText = initials || 'U';
+            }
+        }
+
+        async function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert("⚠️ Image file is too large! Please select a picture under 5MB.");
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Image = e.target.result;
+                    
+                    localStorage.setItem('userAvatar', base64Image);
+                    renderAvatar(base64Image, localStorage.getItem('userName'));
+
+                    const token = localStorage.getItem('authToken');
+                    if (!token) return;
+
+                    try {
+                        const apiBase = window.API_BASE || 'http://127.0.0.1:5000/api';
+                        const response = await fetch(`${apiBase}/user/avatar`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ avatar: base64Image })
+                        });
+
+                        const data = await response.json();
+                        if (response.ok) {
+                            alert("✅ Profile picture updated and saved successfully!");
+                        } else {
+                            alert(`❌ Avatar save failed: ${data.message}`);
+                        }
+                    } catch (err) {
+                        console.error("Avatar Upload Error:", err);
+                        alert("⚠️ Server Connection Error while saving profile photo.");
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderResumeHistory(resumes) {
+            const container = document.getElementById('resume-list-container');
+            if (resumes.length === 0) {
+                container.innerHTML = `
+                    <div class="no-resumes">
+                        <p>No saved resumes found yet! 📝</p>
+                        <a href="index.html" class="auth-btn" style="display: inline-block; margin-top: 10px; width: auto; padding: 10px 20px; text-decoration: none;">Create Your First Resume</a>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = resumes.map(r => {
+                    const name = r.full_name || r.personalDetails?.fullName || "Saved Resume";
+                    return `
+                        <div class="resume-item-card">
+                            <div class="resume-details">
+                                <h4>📄 ${name}'s Resume</h4>
+                                <span>Created on: ${new Date(r.createdAt || Date.now()).toLocaleDateString()}</span>
+                            </div>
+                            <div class="resume-actions">
+                                <button class="btn-action btn-view" onclick="loadResumeIntoBuilder('${r._id}')">Load / Edit ✏️</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function loadResumeIntoBuilder(resumeId) {
+            localStorage.setItem('activeResumeId', resumeId);
+            window.location.href = 'index.html';
+        }
+
+        function openPassModal() {
+            document.getElementById('change-pass-modal').style.display = 'flex';
+        }
+
+        function closePassModal() {
+            document.getElementById('change-pass-modal').style.display = 'none';
+            document.getElementById('change-pass-form').reset();
+        }
+
+        document.getElementById('change-pass-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const currPass = document.getElementById('curr-pass').value;
+            const newPass = document.getElementById('new-pass').value;
+            const confirmNewPass = document.getElementById('confirm-new-pass').value;
+
+            if (newPass !== confirmNewPass) {
+                alert('❌ New Password and Confirm Password do not match!');
+                return;
+            }
+
+            const token = localStorage.getItem('authToken');
+            const btn = document.getElementById('save-pass-btn');
+            btn.innerText = "Updating...";
+            btn.disabled = true;
+
+            try {
+                const apiBase = window.API_BASE || 'http://127.0.0.1:5000/api';
+                const response = await fetch(`${apiBase}/auth/change-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ currentPassword: currPass, newPassword: newPass })
+                });
+
+                const data = await response.json();
+                alert(data.message);
+
+                if (response.ok) {
+                    closePassModal();
+                }
+            } catch (err) {
+                alert('Server error while updating password.');
+            } finally {
+                btn.innerText = "Update Password";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

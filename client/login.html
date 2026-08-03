@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ResumeForge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <script src="js/auth.js"></script>
+    <script>redirectIfLoggedIn();</script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="brand-icon">⚡</span>
+                <div class="brand-text">
+                    <h1>ResumeForge</h1>
+                    <p>Dynamic & ATS-Friendly Resume Builder</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="home.html" class="btn-theme-toggle" style="text-decoration: none;">🏠 Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card-box">
+            <div class="auth-header-title">
+                <h2>Welcome Back 🚪</h2>
+                <p>Log in to access your saved resumes</p>
+            </div>
+
+            <form id="login-form">
+                <div class="auth-group">
+                    <label>Registered Email Address *</label>
+                    <input type="email" id="login-email" class="auth-input" placeholder="abc@gmail.com" required>
+                </div>
+
+                <div class="auth-group">
+                    <label>Password *</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="login-pass" class="auth-input" placeholder="Your Password" required>
+                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('login-pass', this)">👁️</span>
+                    </div>
+                </div>
+
+                <div style="text-align: right; margin-top: -8px; margin-bottom: 16px;">
+                    <a href="forgot-password.html" class="auth-link-bold" style="font-size: 13px;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="auth-btn">Sign In</button>
+            </form>
+
+            <div style="text-align: center; margin: 18px 0; color: #94a3b8; font-size: 13px; font-weight: 600;">OR</div>
+
+            <button type="button" class="auth-btn" style="background: #ffffff; color: #0f172a; border: 1.5px solid #cbd5e1; box-shadow: none;" onclick="alert('Google Sign-In integration ready!')">
+                🌐 Continue with Google
+            </button>
+
+            <div class="auth-footer-text">
+                Don't have an account? <a href="signup.html" class="auth-link-bold">Create a new account</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
+            await handleLogin(email, pass);
+        });
+    </script>
+</body>
+</html>

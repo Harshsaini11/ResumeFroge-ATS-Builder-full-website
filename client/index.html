@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeForge - Dynamic Resume Builder</title>
+    <!-- Professional Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400&family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+
+    <!-- Strict Page Security -->
+    <script src="js/auth.js"></script>
+    <script>protectIndexPage();</script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- HEADER WITH PROFILE LOGO BUTTON -->
+<header class="app-header">
+    <div class="header-container">
+        <div class="brand">
+            <span class="brand-icon">⚡</span>
+            <div class="brand-text">
+                <h1>ResumeForge</h1>
+                <p>Dynamic & ATS-Friendly Resume Builder</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="live-status">
+                <span class="status-dot"></span>
+                <span>Automated ATS Ready</span>
+            </div>
+
+            <button type="button" class="btn-theme-toggle" onclick="window.location.href='index.html'">
+                    ✨ Create New
+            </button>
+
+            <!-- RIGHT PROFILE AVATAR ICON BUTTON -->
+            <button type="button" class="profile-avatar-btn" id="open-profile-drawer-btn" title="Account Menu">
+                <div id="header-avatar-display" class="header-avatar-circle">U</div>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- RIGHT-SIDE PROFILE DRAWER / SIDEBAR -->
+<div id="profile-drawer-overlay" class="drawer-overlay" onclick="closeProfileDrawer()"></div>
+
+<div id="profile-drawer" class="profile-drawer">
+    <button class="drawer-close-btn" onclick="closeProfileDrawer()">&times;</button>
+    
+    <!-- TOP USER INFO -->
+    <div class="drawer-user-info">
+        <div id="drawer-avatar-display" class="drawer-avatar-circle">U</div>
+        <h3 id="drawer-user-name">User Account</h3>
+        <p id="drawer-user-email">user@gmail.com</p>
+    </div>
+
+    <div class="drawer-divider"></div>
+
+    <!-- NAVIGATION LINKS -->
+    <div class="drawer-menu">
+        <a href="profile.html" class="drawer-menu-item">
+            <span class="drawer-icon">👤</span> My Profile
+        </a>
+        <a href="index.html" class="drawer-menu-item active">
+            <span class="drawer-icon">🏠</span> Builder Dashboard
+        </a>
+    </div>
+
+    <!-- BOTTOM LOGOUT SECTION -->
+    <div class="drawer-footer">
+        <button type="button" class="drawer-logout-btn" onclick="handleLogout()">
+            <span>🚪</span> Log Out
+        </button>
+    </div>
+</div>
+
+    <div class="main-container">
+        
+        <!-- FORM SECTION -->
+        <div id="form-section" class="form-card">
+            <h2>Enter Resume Details</h2>
+            <form id="resume-form">
+                
+                <!-- Layout Theme Selection -->
+<!-- Layout Theme Selection -->
+<fieldset class="theme-fieldset">
+    <legend>🎨 Choose Resume Layout Structure</legend>
+    <p class="subtitle-text">Select your preferred layout structure:</p>
+    
+    <!-- 🎡 CAROUSEL SLIDER WRAPPER -->
+   <!-- 🎡 CAROUSEL SLIDER WRAPPER (FULL PAGE MINI RESUME CONTENT) -->
+<div class="theme-slider-wrapper">
+    <div class="theme-grid-cards" id="theme-slider">
+        
+        <!-- 1. Modern Classic -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="modern_classic" checked>
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-minimal">
+                    <div class="res-body-padding" style="padding: 6px; width: 100%;">
+                        <h3 style="font-size: 9.5px; color: #0f172a; margin: 0; font-weight: 800;">HARSH SAINI</h3>
+                        <p style="font-size: 6px; color: #2563eb; margin: 0 0 3px 0; font-weight: 600;">Java Software Developer • Meerut, India</p>
+                        
+                        <div class="res-sec-title">PROFILE SUMMARY</div>
+                        <div class="res-dummy-text">Logic-driven Java developer with expertise in Core Java, OOPs, Data Structures, and building web apps.</div>
+                        
+                        <div class="res-sec-title">WORK EXPERIENCE</div>
+                        <div class="res-dummy-bold">Java Developer Intern • Elevate Labs</div>
+                        <div class="res-dummy-text">• Developed clean backend modules & RESTful APIs.</div>
+                        
+                        <div class="res-sec-title">PROJECTS</div>
+                        <div class="res-dummy-bold">ResumeForge ATS Builder</div>
+                        <div class="res-dummy-text">• Full-stack web app with PDF export functionality.</div>
+
+                        <div class="res-sec-title">EDUCATION & SKILLS</div>
+                        <div class="res-dummy-text"><strong>B.Tech CS:</strong> Quantum University (75%)</div>
+                        <div class="res-dummy-text"><strong>Skills:</strong> Core Java, C++, OOPs, OS, Linux, Git</div>
+                    </div>
+                </div>
+                <h3>1. Modern Classic</h3>
+                <span class="layout-tag">Single Column</span>
+            </div>
+        </label>
+
+        <!-- 2. Left Sidebar -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="left_sidebar">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-green">
+                    <div class="res-sidebar-green">
+                        <div class="res-photo-square">👤</div>
+                        <div class="res-side-title-green">CONTACT</div>
+                        <div class="res-side-text">harshsaini0828@gmail.com</div>
+                        <div class="res-side-text">+91 1234567890</div>
+                        
+                        <div class="res-side-title-green">SKILLS</div>
+                        <div class="res-side-text">• Core Java & C++</div>
+                        <div class="res-side-text">• OOPs & DSA</div>
+                        <div class="res-side-text">• OS & Linux</div>
+                        
+                        <div class="res-side-title-green">EDUCATION</div>
+                        <div class="res-side-text">B.Tech CS (2023-2027)</div>
+                        <div class="res-side-text">Quantum University</div>
+                    </div>
+                    <div class="res-main-padding">
+                        <h3 class="res-name">Harsh Saini</h3>
+                        <p class="res-sub">Software Developer</p>
+                        
+                        <div class="res-sec-title-green">SUMMARY</div>
+                        <div class="res-dummy-text">Passionate student developer building modern web apps.</div>
+                        
+                        <div class="res-sec-title-green">EXPERIENCE</div>
+                        <div class="res-dummy-bold">Java Intern @ Elevate Labs</div>
+                        <div class="res-dummy-text">• Worked on backend logic & algorithm tasks.</div>
+                        
+                        <div class="res-sec-title-green">PROJECTS</div>
+                        <div class="res-dummy-bold">ResumeForge App</div>
+                        <div class="res-dummy-text">• Dynamic ATS Resume Generator with Node.js.</div>
+                    </div>
+                </div>
+                <h3>2. Left Sidebar</h3>
+                <span class="layout-tag">Split Grid (32/68)</span>
+            </div>
+        </label>
+
+        <!-- 3. Right Sidebar -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="right_sidebar">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-black">
+                    <div class="res-main">
+                        <h3 class="res-name">Harsh Saini</h3>
+                        <p class="res-sub">Software Developer</p>
+                        
+                        <div class="res-sec-title">PROFILE</div>
+                        <div class="res-dummy-text">Java engineer focused on system logic and scalable code.</div>
+                        
+                        <div class="res-sec-title">WORK HISTORY</div>
+                        <div class="res-dummy-bold">Java Developer Intern</div>
+                        <div class="res-dummy-text">Elevate Labs • Present</div>
+                        
+                        <div class="res-sec-title">KEY PROJECTS</div>
+                        <div class="res-dummy-bold">ATS Resume Generator</div>
+                        <div class="res-dummy-text">• Live previews, custom sections & MongoDB.</div>
+                        
+                        <div class="res-sec-title">EDUCATION</div>
+                        <div class="res-dummy-text">B.Tech CS - Quantum Univ</div>
+                    </div>
+                    <div class="res-sidebar-dark">
+                        <div class="res-photo-box">👤</div>
+                        <div class="res-side-title">CONTACT</div>
+                        <div class="res-side-text">harsh@gmail.com</div>
+                        <div class="res-side-text">+91 1234567890</div>
+                        
+                        <div class="res-side-title">TECHNICAL SKILLS</div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                        <div class="res-side-text">Java (90%)</div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                        <div class="res-side-text">C++ & OOP (80%)</div>
+                    </div>
+                </div>
+                <h3>3. Right Sidebar</h3>
+                <span class="layout-tag">Split Grid (68/32)</span>
+            </div>
+        </label>
+
+        <!-- 4. Minimalist Clean -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="minimalist">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-minimal">
+                    <div class="res-center-header" style="width: 100%;">
+                        <h3>HARSH SAINI</h3>
+                        <p>Software Developer • Java & C++ • harsh@gmail.com</p>
+                    </div>
+                    <div class="res-body-padding" style="padding: 6px; width: 100%;">
+                        <div class="res-sec-title-center">CORE COMPETENCIES</div>
+                        <div class="res-dummy-text" style="text-align: center;">Core Java • Object Oriented Programming • Operating Systems • AI</div>
+                        
+                        <div class="res-sec-title-center" style="margin-top: 4px;">WORK EXPERIENCE</div>
+                        <div class="res-dummy-bold" style="text-align: center;">Java Developer Intern</div>
+                        <div class="res-dummy-text" style="text-align: center;">Elevate Labs • Sep 2025 - Present</div>
+                        
+                        <div class="res-sec-title-center" style="margin-top: 4px;">ACADEMIC HISTORY</div>
+                        <div class="res-dummy-bold" style="text-align: center;">B.Tech Computer Science</div>
+                        <div class="res-dummy-text" style="text-align: center;">Quantum University (2023 - 2027)</div>
+                    </div>
+                </div>
+                <h3>4. Minimalist Clean</h3>
+                <span class="layout-tag">Lightweight Typography</span>
+            </div>
+        </label>
+
+        <!-- 5. Executive Accent Header -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="hero_banner">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-orange">
+                    <div class="res-top-banner">
+                        <div>
+                            <h3 class="res-name-white">Harsh Saini</h3>
+                            <p class="res-sub-white">Backend Java Developer</p>
+                        </div>
+                        <div class="res-photo-circle-white">👤</div>
+                    </div>
+                    <div class="res-body-padding" style="padding: 6px; width: 100%;">
+                        <div class="res-sec-title">PROFESSIONAL SUMMARY</div>
+                        <div class="res-dummy-text">Developing scalable backend logic, algorithms, and web tools.</div>
+                        
+                        <div class="res-sec-title">EXPERIENCE</div>
+                        <div class="res-dummy-bold">Java Developer Intern @ Elevate Labs</div>
+                        
+                        <div class="res-sec-title">PROJECTS</div>
+                        <div class="res-dummy-bold">ResumeForge App</div>
+                        <div class="res-dummy-text">Full Stack ATS resume builder.</div>
+
+                        <div class="res-sec-title">TECHNICAL SKILLS</div>
+                        <div class="skill-bar-orange"><div style="width: 90%;"></div></div>
+                        <div class="res-dummy-text">Core Java, C++, DSA, OS</div>
+                    </div>
+                </div>
+                <h3>5. Executive Accent</h3>
+                <span class="layout-tag">Top Banner Header</span>
+            </div>
+        </label>
+
+        <!-- 6. Compact Single Page -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="compact">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-compact">
+                    <div class="res-body-padding" style="padding: 6px; width: 100%;">
+                        <h3 style="margin:0; font-size:9.5px; color:#0f172a; font-weight:800;">HARSH SAINI</h3>
+                        <div style="font-size:5.8px; color:#2563eb; margin-bottom: 3px;">harsh@gmail.com • +91 1234567890</div>
+                        
+                        <div class="res-sec-title" style="margin: 1px 0;">SUMMARY</div>
+                        <div class="res-dummy-text">Java developer with strong DSA & OOP foundation.</div>
+
+                        <div class="res-sec-title" style="margin: 1px 0;">EDUCATION</div>
+                        <div class="res-dummy-bold">B.Tech CS</div>
+                        <div class="res-dummy-text">Quantum University (2023-2027)</div>
+                        
+                        <div class="res-sec-title" style="margin: 1px 0;">EXPERIENCE</div>
+                        <div class="res-dummy-bold">Java Intern</div>
+                        <div class="res-dummy-text">Elevate Labs • 2025</div>
+
+                        <div class="res-sec-title" style="margin: 1px 0;">PROJECTS</div>
+                        <div class="res-dummy-text">ResumeForge ATS App</div>
+                    </div>
+                </div>
+                <h3>6. Compact Single Page</h3>
+                <span class="layout-tag">Tight Padding Format</span>
+            </div>
+        </label>
+
+        <!-- 7. Two Column Balanced -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="grid_compact">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-twocol">
+                    <div class="res-two-col-equal" style="width: 100%;">
+                        <div class="col-half" style="background:#f8fafc; padding:4px;">
+                            <h4 style="margin:0; font-size:8px; color:#2563eb;">Harsh Saini</h4>
+                            <p style="font-size:5px; color:#64748b; margin-bottom:2px;">Developer</p>
+                            
+                            <div class="res-sec-title">SKILLS</div>
+                            <div class="res-dummy-text">• Java & C++<br>• OOPs Principles<br>• SQL Databases<br>• OS & Linux</div>
+                            
+                            <div class="res-sec-title">CONTACT</div>
+                            <div class="res-dummy-text">harsh@gmail.com<br>+91 1234567890</div>
+                        </div>
+                        <div class="col-half" style="padding:4px;">
+                            <div class="res-sec-title">EXPERIENCE</div>
+                            <div class="res-dummy-bold">Java Intern</div>
+                            <div class="res-dummy-text">Elevate Labs</div>
+                            
+                            <div class="res-sec-title">PROJECTS</div>
+                            <div class="res-dummy-bold">ATS Resume App</div>
+                            <div class="res-dummy-text">Full stack builder</div>
+
+                            <div class="res-sec-title">EDUCATION</div>
+                            <div class="res-dummy-text">B.Tech CS</div>
+                        </div>
+                    </div>
+                </div>
+                <h3>7. Two Column Balanced</h3>
+                <span class="layout-tag">50/50 Matrix Grid</span>
+            </div>
+        </label>
+
+        <!-- 8. Technical Developer -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="tech_dev">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-tech" style="width: 100%;">
+                    <div class="res-body-padding" style="padding: 6px; width: 100%;">
+                        <h3 class="res-name-blue" style="font-size: 9px; margin:0; color:#0284c7;">&lt;Harsh Saini /&gt;</h3>
+                        <p class="res-sub">Backend Java Developer</p>
+                        
+                        <div class="tech-chip-group" style="display:flex; gap:2px; margin:2px 0;">
+                            <span class="tech-chip" style="background:#0284c7; color:white; padding:1px 3px; border-radius:2px; font-size:5px;">Java</span>
+                            <span class="tech-chip" style="background:#0284c7; color:white; padding:1px 3px; border-radius:2px; font-size:5px;">C++</span>
+                            <span class="tech-chip" style="background:#0284c7; color:white; padding:1px 3px; border-radius:2px; font-size:5px;">Linux</span>
+                        </div>
+                        
+                        <div class="res-sec-title-blue" style="font-size:6px; font-weight:700; color:#0284c7;">SYSTEM EXPERTISE</div>
+                        <div class="res-dummy-text">• OS Scheduling & Memory Management</div>
+                        <div class="res-dummy-text">• Compiler Design & Logic</div>
+
+                        <div class="res-sec-title-blue" style="font-size:6px; font-weight:700; color:#0284c7;">EXPERIENCE</div>
+                        <div class="res-dummy-bold">Java Developer Intern</div>
+                        <div class="res-dummy-text">Elevate Labs • Present</div>
+                        
+                        <div class="res-sec-title-blue" style="font-size:6px; font-weight:700; color:#0284c7;">EDUCATION</div>
+                        <div class="res-dummy-text">B.Tech CS - Quantum Univ</div>
+                    </div>
+                </div>
+                <h3>8. Technical Developer</h3>
+                <span class="layout-tag">Code Tag Special</span>
+            </div>
+        </label>
+
+        <!-- 9. Elegant Serif -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="serif_minimal">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-serif">
+                    <div class="res-body-padding" style="font-family: Georgia, serif; text-align: center; width: 100%; padding: 6px;">
+                        <h3 style="font-size:9px; font-style:italic; margin-bottom:1px; color:#0f172a;">Harsh Kumar Saini</h3>
+                        <p style="font-size:5.5px; color:#64748b; margin-bottom:2px;">Software Engineering Candidate</p>
+                        
+                        <div style="border-top:1px solid #0f172a; border-bottom:1px solid #0f172a; padding:1px 0; font-size:5.5px; color:#0f172a; font-weight:bold;">
+                            ACADEMIC & PROFESSIONAL PROFILE
+                        </div>
+                        
+                        <div style="font-size:5.8px; margin-top:3px; color:#475569; text-align:left;">
+                            <strong>Summary:</strong> Core Java & Web Developer.<br>
+                            <strong>Education:</strong> B.Tech CS - Quantum Univ<br>
+                            <strong>Experience:</strong> Java Intern @ Elevate Labs<br>
+                            <strong>Projects:</strong> ResumeForge ATS Builder
+                        </div>
+                    </div>
+                </div>
+                <h3>9. Elegant Serif</h3>
+                <span class="layout-tag">Classic Serif Style</span>
+            </div>
+        </label>
+
+        <!-- 10. Creative Modern -->
+        <label class="theme-card">
+            <input type="radio" name="theme" value="purple_modern">
+            <div class="card-content">
+                <div class="real-resume-preview tpl-style-purple">
+                    <div class="res-purple-sidebar" style="width:25%; background:#f3e8ff; border-right:1px solid #7c3aed; padding:4px; display:flex; flex-direction:column; align-items:center;">
+                        <div class="res-photo-circle" style="background:#7c3aed; color:white; width:16px; height:16px; font-size:8px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:4px;">👤</div>
+                        <div class="res-side-text" style="color:#7c3aed; font-size:5px; text-align:center;">Java<br>C++<br>OOPs<br>Web</div>
+                    </div>
+                    <div class="res-main-padding" style="width:75%; padding:6px;">
+                        <h3 style="margin:0; color:#7c3aed; font-size:8.5px; font-weight:800;">Harsh Saini</h3>
+                        <p class="res-sub">Software Developer</p>
+                        
+                        <div class="res-sec-title" style="color:#7c3aed; font-size:6px;">SUMMARY</div>
+                        <div class="res-dummy-text">Building modern web software.</div>
+
+                        <div class="res-sec-title" style="color:#7c3aed; font-size:6px;">EXPERIENCE</div>
+                        <div class="res-dummy-bold" style="font-size:5.8px;">Java Intern @ Elevate Labs</div>
+                        
+                        <div class="res-sec-title" style="color:#7c3aed; font-size:6px;">PROJECTS</div>
+                        <div class="res-dummy-bold" style="font-size:5.8px;">ResumeForge App</div>
+                    </div>
+                </div>
+                <h3>10. Creative Modern</h3>
+                <span class="layout-tag">Purple Accent Border</span>
+            </div>
+        </label>
+
+    </div>
+</div>
+</fieldset>
+                
+                <fieldset class="color-fieldset">
+                        <legend>🎨 Choose Accent Color</legend>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <label for="theme-color"><strong>Theme Accent Color:</strong></label>
+                                <input type="color" id="theme-color" name="theme_color" value="#2563eb" style="width: 50px; height: 35px; border: none; cursor: pointer;">
+                            </div>
+                </fieldset>
+                <!-- Font Selector -->
+                <fieldset class="font-fieldset">
+                    <legend>🔤 Choose Resume Font (ATS & Professional Standard)</legend>
+                    <div class="font-select-container">
+                        <label for="font-choice"><strong>Font Family:</strong></label>
+                        <select name="font_family" id="font-choice" class="font-dropdown">
+                            <optgroup label="✨ Sans-Serif (Modern & Clean)">
+                                <option value="Calibri, 'Segoe UI', Arial, sans-serif" style="font-family: Calibri, sans-serif;" selected>Calibri (Corporate Standard)</option>
+                                <option value="Arial, sans-serif" style="font-family: Arial, sans-serif;">Arial (Universal ATS Friendly)</option>
+                                <option value="'Inter', sans-serif" style="font-family: 'Inter', sans-serif;">Inter (Modern Tech)</option>
+                                <option value="'Roboto', sans-serif" style="font-family: 'Roboto', sans-serif;">Roboto (Clean Digital)</option>
+                                <option value="'Poppins', sans-serif" style="font-family: 'Poppins', sans-serif;">Poppins (Contemporary)</option>
+                            </optgroup>
+                            <optgroup label="📜 Serif (Classic & Executive)">
+                                <option value="'Cormorant Garamond', Garamond, serif" style="font-family: 'Cormorant Garamond', serif;">Garamond (Elegant & Compact)</option>
+                                <option value="Georgia, serif" style="font-family: Georgia, serif;">Georgia (Readable Classic)</option>
+                                <option value="'Times New Roman', serif" style="font-family: 'Times New Roman', serif;">Times New Roman (Academic)</option>
+                            </optgroup>
+                            <optgroup label="💻 Monospace (Technical)">
+                                <option value="'Fira Code', monospace" style="font-family: 'Fira Code', monospace;">Fira Code (Developer Special)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <!-- 3. Personal Details -->
+                <fieldset>
+                    <legend>Personal Details</legend>
+                    <div class="input-grid">
+                        <input type="text" name="full_name" placeholder="Full Name" required>
+                        <input type="text" name="role" placeholder="Target Role (e.g. Java Developer)" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="text" name="phone" placeholder="Phone Number" required>
+                        <input type="text" name="location" placeholder="Location (e.g. Meerut, India)" required>
+                        <input type="text" name="github" placeholder="GitHub URL">
+                        <input type="text" name="linkedin" placeholder="LinkedIn URL">
+                    </div>
+
+                    <div style="margin-top: 15px; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                        <label><strong>📷 Profile Photo (Optional):</strong></label>
+                        <div class="input-grid" style="margin-top: 8px;">
+                            <input type="file" id="profile-photo-input" accept="image/*">
+                            <select id="photo-shape-select">
+                                <option value="circle" selected>🔵 Circle Shape</option>
+                                <option value="square">🔲 Square Shape</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <textarea name="summary" rows="3" placeholder="Professional Summary..." required></textarea>
+                </fieldset>
+
+                <!-- 1. EDUCATION (Removable Section) -->
+                <fieldset class="section-fieldset">
+                    <div class="section-header-control">
+                        <legend>Education</legend>
+                        <button type="button" class="delete-section-btn" onclick="this.closest('fieldset').remove()">🗑️ Delete Section</button>
+                    </div>
+                    <div id="education-container"></div>
+                    <button type="button" class="add-btn" id="add-edu-btn">➕ Add Education</button>
+                </fieldset>
+
+                <!-- 2. TECHNICAL SKILLS (Removable Section) -->
+                <fieldset class="section-fieldset">
+                    <div class="section-header-control">
+                        <legend>Technical Skills</legend>
+                        <button type="button" class="delete-section-btn" onclick="this.closest('fieldset').remove()">🗑️ Delete Section</button>
+                    </div>
+                    <div id="skills-container"></div>
+                    <button type="button" class="add-btn" id="add-skill-btn">➕ Add Skill Category</button>
+                </fieldset>
+
+                <!-- 3. WORK EXPERIENCE (Removable Section) -->
+                <fieldset class="section-fieldset">
+                    <div class="section-header-control">
+                        <legend>Work Experience</legend>
+                        <button type="button" class="delete-section-btn" onclick="this.closest('fieldset').remove()">🗑️ Delete Section</button>
+                    </div>
+                    <div id="experience-container"></div>
+                    <button type="button" class="add-btn" id="add-exp-btn">➕ Add Experience</button>
+                </fieldset>
+
+                <!-- 4. KEY PROJECTS (Removable Section) -->
+                <fieldset class="section-fieldset">
+                    <div class="section-header-control">
+                        <legend>Key Projects</legend>
+                        <button type="button" class="delete-section-btn" onclick="this.closest('fieldset').remove()">🗑️ Delete Section</button>
+                    </div>
+                    <div id="projects-container"></div>
+                    <button type="button" class="add-btn" id="add-proj-btn">➕ Add Project</button>
+                </fieldset>
+
+                <!-- 5. 🌟 CUSTOM SECTIONS HOLDER (Is jagah naye sections create honge) -->
+                <div id="custom-sections-container"></div>
+
+                <!-- 6. ➕ ADD NEW SECTION BUTTON (Generate Resume se PEHLE rakhein) -->
+                <div style="margin: 20px 0;">
+                    <button type="button" id="add-custom-section-btn" class="add-section-btn">
+                        ✨ Add Entire New Section (e.g. Certifications, Awards, Languages)
+                    </button>
+                </div>
+
+                <!-- 7. 🚀 SUBMIT BUTTON (ISKO SABSE AKHIR MEIN RAKHEIN) -->
+                <button type="submit" class="submit-btn">Generate Resume 🚀</button>
+            </form>
+        </div>
+
+        <!-- PREVIEW SECTION -->
+        <div id="preview-section" style="display: none;">
+            <div class="action-bar">
+                <button id="edit-btn" class="btn btn-secondary">✏️ Edit Details</button>
+                <button onclick="window.print()" class="btn btn-primary">🖨️ Download / Save PDF</button>
+            </div>
+
+            <div class="active-theme-card-banner">
+                <div class="banner-icon" id="banner-icon">📄</div>
+                <div class="banner-text">
+                    <span>Active Layout Theme:</span>
+                    <strong id="banner-title">Modern Classic (Single Column)</strong>
+                </div>
+            </div>
+
+            <div id="resume-sheet" class="resume-sheet"></div>
+        </div>
+
+    </div>
+
+    <footer class="app-footer">
+    <div class="footer-container">
+        
+        <!-- Left: Brand + Creator Name -->
+        <div class="footer-brand">
+            <span class="brand-icon">⚡</span>
+            <div class="brand-text">
+                <h3>ResumeForge</h3>
+                <p>Created by <strong>Harsh Kumar Saini</strong> | © 2026 All Rights Reserved</p>
+            </div>
+        </div>
+
+        <!-- Right: Badges -->
+        <div class="footer-actions">
+            <div class="footer-badge">
+                <span>✅</span> ATS Standard Ready
+            </div>
+            <div class="footer-badge">
+                <span>🔒</span> 100% Private & Local
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

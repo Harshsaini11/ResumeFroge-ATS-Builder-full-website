@@ -1,0 +1,181 @@
+/* =========================================================
+   🔑 AUTHENTICATION PAGES STYLES (auth.css)
+   ========================================================= */
+
+/* Auth Page Wrapper Centering */
+.auth-container {
+    max-width: 440px !important;
+    width: 100% !important;
+    margin: 40px auto !important;
+    padding: 0 20px;
+    box-sizing: border-box !important;
+}
+
+/* Auth Card Container */
+.auth-card-box {
+    background: #ffffff;
+    padding: 36px 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e2e8f0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.auth-header-title {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.auth-header-title h2 {
+    margin: 0 0 8px 0;
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.auth-header-title p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Form Groups & Inputs */
+.auth-group {
+    margin-bottom: 18px;
+}
+
+.auth-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: inherit;
+    color: #0f172a;
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.auth-input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Checkbox & Forgot Links Layout */
+.auth-flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.auth-checkbox-label {
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.auth-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.auth-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.auth-link-bold {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link-bold:hover {
+    text-decoration: underline;
+}
+
+/* Submit Button */
+.auth-btn {
+    width: 100%;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    transition: all 0.2s;
+}
+
+.auth-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+/* Bottom Footer Text Link */
+.auth-footer-text {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* Password Eye Icon Relative Wrapper */
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 40px !important;
+}
+
+.toggle-password-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+    color: #64748b;
+}
+
+/* OTP Box Style */
+.otp-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.otp-input {
+    width: 45px !important;
+    height: 48px !important;
+    text-align: center !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+}

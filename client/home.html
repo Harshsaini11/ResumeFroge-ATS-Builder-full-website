@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeForge - Professional ATS Resume Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
+    <script src="js/auth.js"></script>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <span>⚡ Create your job-winning resume in under 5 minutes with ATS automation!</span>
+    </div>
+
+    <!-- BACKGROUND GLOW EFFECTS -->
+    <div class="bg-glow blob-1"></div>
+    <div class="bg-glow blob-2"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand">
+                <span class="brand-icon">⚡</span>
+                <div class="brand-text">
+                    <h1>ResumeForge</h1>
+                    <p>ATS-Friendly Resume Builder</p>
+                </div>
+            </div>
+
+            <div class="nav-actions" id="nav-auth-actions">
+                <!-- Dynamic Content Loaded Via JS -->
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-text-content">
+                <div class="badge-pill">
+                    <span class="pulse-dot"></span> #1 Free ATS Resume Generator
+                </div>
+
+                <h1 class="hero-title">
+                    The Online <span class="gradient-text">Resume Builder</span> That Gets You Hired.
+                </h1>
+
+                <p class="hero-subtitle">
+                    Create a professional ATS-friendly resume in minutes. Pick a modern template, customize your layout, and download instant PDFs.
+                </p>
+
+                <div class="hero-cta-group" id="hero-cta-buttons">
+                    <!-- Dynamic CTA Buttons Loaded Via JS -->
+                </div>
+
+                <div class="trust-indicators">
+                    <span>✅ No Credit Card Required</span>
+                    <span>✅ ATS Score Compliant</span>
+                    <span>✅ Direct PDF Download</span>
+                </div>
+            </div>
+
+            <!-- LIVE PREVIEW SHOWCASE -->
+            <div class="hero-preview-wrapper">
+                <div class="hero-preview-card">
+                    <div class="preview-header-bar">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="preview-title-text">Live Resume Builder Preview</span>
+                    </div>
+                    <div class="preview-mockup-body">
+                        <div class="mockup-sidebar">
+                            <div class="mockup-avatar"></div>
+                            <div class="mockup-line short"></div>
+                            <div class="mockup-line medium"></div>
+                            <div class="mockup-line full"></div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="mockup-header-title"></div>
+                            <div class="mockup-line full"></div>
+                            <div class="mockup-line full"></div>
+                            <div class="mockup-section-heading"></div>
+                            <div class="mockup-line medium"></div>
+                            <div class="mockup-line full"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-badge badge-ats">
+                    <span>🎯 99% ATS Pass Score</span>
+                </div>
+                <div class="floating-badge badge-pdf">
+                    <span>📄 Instant PDF Download</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BANNER -->
+    <section class="stats-banner">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h2>100k+</h2>
+                <p>Resumes Created</p>
+            </div>
+            <div class="stat-item">
+                <h2>10+</h2>
+                <p>ATS Templates</p>
+            </div>
+            <div class="stat-item">
+                <h2>100%</h2>
+                <p>Free & Secure</p>
+            </div>
+        </div>
+    </section>
+
+  <!-- 🎨 100% CLEAR VISUAL RESUME TEMPLATES SLIDER -->
+    <section class="templates-section">
+        <div class="section-header">
+            <h2>10+ Professional <span class="gradient-text">ATS Resume Templates</span></h2>
+            <p>Pick a template layout to get started instantly.</p>
+        </div>
+
+        <!-- SLIDER WRAPPER WITH ARROWS -->
+        <div class="slider-wrapper">
+            <button class="slider-btn prev-btn" onclick="scrollTemplates(-320)">&#10094;</button>
+
+            <!-- Cards Container (All 10 Real Content Templates) -->
+            <div class="templates-grid" id="templates-grid-container">
+                
+                <!-- 1. Modern Classic -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-minimal">
+                        <div class="res-body-padding" style="padding: 10px;">
+                            <h3 style="font-size: 13px; color: #0f172a; margin: 0; font-weight: 800;">HARSH SAINI</h3>
+                            <p style="font-size: 8px; color: #2563eb; margin: 0 0 6px 0; font-weight: 600;">Java Software Developer</p>
+                            
+                            <div class="res-sec-title">PROFILE SUMMARY</div>
+                            <div class="res-dummy-text">Passionate Java developer skilled in Core Java, OOPs, Data Structures, and building web applications.</div>
+                            
+                            <div class="res-sec-title">EXPERIENCE</div>
+                            <div class="res-dummy-bold">Java Developer Intern</div>
+                            <div class="res-dummy-text">Elevate Labs • Sep 2025 - Present</div>
+                            <div class="res-dummy-text">• Built RESTful APIs & clean backend modules.</div>
+
+                            <div class="res-sec-title">EDUCATION</div>
+                            <div class="res-dummy-bold">B.Tech Computer Science</div>
+                            <div class="res-dummy-text">Quantum University • 2023 - 2027</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Classic ⚡</a>
+                        </div>
+                    </div>
+                    <h4>1. Modern Classic</h4>
+                </div>
+
+                <!-- 2. Left Sidebar -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-green">
+                        <div class="res-sidebar-green">
+                            <div class="res-photo-square">👤</div>
+                            <div class="res-side-title-green">CONTACT</div>
+                            <div class="res-side-text">harsh@gmail.com</div>
+                            
+                            <div class="res-side-title-green">SKILLS</div>
+                            <div class="res-side-text">• Java & C++</div>
+                            <div class="res-side-text">• OOPs & DSA</div>
+                            <div class="res-side-text">• OS & Linux</div>
+                        </div>
+                        <div class="res-main-padding">
+                            <h3 class="res-name">Harsh Saini</h3>
+                            <p class="res-sub">Software Developer</p>
+                            <div class="res-sec-title-green">PROJECTS</div>
+                            <div class="res-dummy-bold">ResumeForge ATS Builder</div>
+                            <div class="res-dummy-text">Created dynamic web builder with live previews & PDF export.</div>
+                            
+                            <div class="res-sec-title-green">EXPERIENCE</div>
+                            <div class="res-dummy-bold">Java Developer Intern</div>
+                            <div class="res-dummy-text">Elevate Labs</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Left Sidebar ⚡</a>
+                        </div>
+                    </div>
+                    <h4>2. Left Sidebar</h4>
+                </div>
+
+                <!-- 3. Right Sidebar -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-black">
+                        <div class="res-main">
+                            <h3 class="res-name">Harsh Saini</h3>
+                            <p class="res-sub">Software Developer</p>
+                            <div class="res-sec-title">WORK HISTORY</div>
+                            <div class="res-dummy-bold">Java Developer Intern</div>
+                            <div class="res-dummy-text">Elevate Labs</div>
+                            <div class="res-dummy-text">• Worked on OOPs logic & data structures.</div>
+                            
+                            <div class="res-sec-title">EDUCATION</div>
+                            <div class="res-dummy-bold">B.Tech CS</div>
+                            <div class="res-dummy-text">Quantum University</div>
+                        </div>
+                        <div class="res-sidebar-dark">
+                            <div class="res-photo-box">👤</div>
+                            <div class="res-side-title">SKILLS</div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                            <div class="res-side-text">Core Java</div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                            <div class="res-side-text">C++ & OOP</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Right Sidebar ⚡</a>
+                        </div>
+                    </div>
+                    <h4>3. Right Sidebar</h4>
+                </div>
+
+                <!-- 4. Minimalist Clean -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-minimal">
+                        <div class="res-center-header">
+                            <h3>HARSH SAINI</h3>
+                            <p>Software Developer • Core Java</p>
+                        </div>
+                        <div class="res-body-padding">
+                            <div class="res-sec-title-center">CORE COMPETENCIES</div>
+                            <div class="res-dummy-text" style="text-align: center;">Core Java • C++ • Operating Systems • Compiler Design • AI</div>
+                            
+                            <div class="res-sec-title-center" style="margin-top: 8px;">WORK EXPERIENCE</div>
+                            <div class="res-dummy-bold" style="text-align: center;">Java Developer Intern</div>
+                            <div class="res-dummy-text" style="text-align: center;">Elevate Labs • Sep 2025 - Present</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Minimalist ⚡</a>
+                        </div>
+                    </div>
+                    <h4>4. Minimalist Clean</h4>
+                </div>
+
+                <!-- 5. Executive Accent Header -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-orange">
+                        <div class="res-top-banner">
+                            <div>
+                                <h3 class="res-name-white">Harsh Saini</h3>
+                                <p class="res-sub-white">Backend Java Engineer</p>
+                            </div>
+                            <div class="res-photo-circle-white">👤</div>
+                        </div>
+                        <div class="res-body-padding">
+                            <div class="res-sec-title">PROFESSIONAL SUMMARY</div>
+                            <div class="res-dummy-text">Developing scalable backend logic and algorithmic code.</div>
+                            <div class="res-sec-title">TECHNICAL SKILLS</div>
+                            <div class="skill-bar-orange"><div style="width: 90%;"></div></div>
+                            <div class="res-dummy-text">Java (90%)</div>
+                            <div class="skill-bar-orange"><div style="width: 80%;"></div></div>
+                            <div class="res-dummy-text">C++ (80%)</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Executive ⚡</a>
+                        </div>
+                    </div>
+                    <h4>5. Executive Accent</h4>
+                </div>
+
+                <!-- 6. Compact Single Page -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-compact">
+                        <div class="res-body-padding" style="padding: 8px;">
+                            <h3 style="margin:0; font-size:11px; color:#0f172a; font-weight:800;">HARSH SAINI</h3>
+                            <div style="font-size:7px; color:#2563eb; margin-bottom: 4px;">harshsaini@gmail.com • +91 1234567890</div>
+                            
+                            <div class="res-sec-title" style="margin: 2px 0;">EDUCATION</div>
+                            <div class="res-dummy-bold">B.Tech Computer Science</div>
+                            <div class="res-dummy-text">Quantum University (2023-2027)</div>
+                            
+                            <div class="res-sec-title" style="margin: 2px 0;">PROJECTS</div>
+                            <div class="res-dummy-bold">ResumeForge ATS Builder</div>
+                            <div class="res-dummy-text">Full Stack Web App with MongoDB & Node.js.</div>
+                            
+                            <div class="res-sec-title" style="margin: 2px 0;">SKILLS</div>
+                            <div class="res-dummy-text">Core Java, C++, DSA, OS, Linux, Git</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Compact ⚡</a>
+                        </div>
+                    </div>
+                    <h4>6. Compact Single Page</h4>
+                </div>
+
+                <!-- 7. Two Column Balanced -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-twocol">
+                        <div class="res-two-col-equal">
+                            <div class="col-half" style="background:#f8fafc; padding:8px;">
+                                <h4 style="margin:0; font-size:11px; color:#2563eb;">Harsh Saini</h4>
+                                <div class="res-sec-title">SKILLS</div>
+                                <div class="res-dummy-text">• Java & C++<br>• OOPs Principles<br>• SQL Databases<br>• Linux Systems</div>
+                            </div>
+                            <div class="col-half" style="padding:8px;">
+                                <div class="res-sec-title">EXPERIENCE</div>
+                                <div class="res-dummy-bold">Java Intern</div>
+                                <div class="res-dummy-text">Elevate Labs</div>
+                                <div class="res-sec-title">PROJECTS</div>
+                                <div class="res-dummy-bold">ATS Resume Generator</div>
+                            </div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Balanced ⚡</a>
+                        </div>
+                    </div>
+                    <h4>7. Two Column Balanced</h4>
+                </div>
+
+                <!-- 8. Technical Developer Special -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-tech">
+                        <div class="res-body-padding">
+                            <h3 class="res-name-blue">&lt;Harsh Saini /&gt;</h3>
+                            <p class="res-sub">Backend Java Developer</p>
+                            
+                            <div class="tech-chip-group">
+                                <span class="tech-chip">Java</span>
+                                <span class="tech-chip">C++</span>
+                                <span class="tech-chip">Linux</span>
+                            </div>
+                            
+                            <div class="res-sec-title-blue">SYSTEM EXPERTISE</div>
+                            <div class="res-dummy-text">• OS Process Scheduling & Memory Management</div>
+                            <div class="res-dummy-text">• Compiler Design & Parsing Logic</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Tech Dev ⚡</a>
+                        </div>
+                    </div>
+                    <h4>8. Technical Developer</h4>
+                </div>
+
+                <!-- 9. Elegant Serif Minimal -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-serif">
+                        <div class="res-body-padding" style="font-family: Georgia, serif; text-align: center;">
+                            <h3 style="font-size:13px; font-style:italic; margin-bottom:2px; color:#0f172a;">Harsh Kumar Saini</h3>
+                            <p style="font-size:8px; color:#64748b; margin-bottom:6px;">Software Engineering Candidate</p>
+                            
+                            <div style="border-top:1px solid #0f172a; border-bottom:1px solid #0f172a; padding:3px 0; font-size:7px; color:#0f172a; font-weight:bold;">
+                                ACADEMIC & PROFESSIONAL HISTORY
+                            </div>
+                            
+                            <div style="font-size:7.5px; margin-top:6px; color:#475569; text-align:left;">
+                                <strong>B.Tech CS</strong> - Quantum University<br>
+                                <strong>Experience:</strong> Java Developer Intern @ Elevate Labs
+                            </div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Serif ⚡</a>
+                        </div>
+                    </div>
+                    <h4>9. Elegant Serif</h4>
+                </div>
+
+                <!-- 10. Creative Purple Modern -->
+                <div class="template-card">
+                    <div class="real-resume-preview tpl-style-purple">
+                        <div class="res-purple-sidebar">
+                            <div class="res-photo-circle" style="background:#7c3aed; color:white;">👤</div>
+                        </div>
+                        <div class="res-main-padding">
+                            <h3 style="margin:0; color:#7c3aed; font-size:12px; font-weight:800;">Harsh Saini</h3>
+                            <p class="res-sub">Web & Software Developer</p>
+                            
+                            <div class="res-sec-title" style="color:#7c3aed;">FEATURED PROJECTS</div>
+                            <div class="res-dummy-bold">ResumeForge App</div>
+                            <div class="res-dummy-text">Interactive ATS resume builder web application.</div>
+                        </div>
+                        <div class="tpl-overlay">
+                            <a href="index.html" class="btn-use-template">Use Creative ⚡</a>
+                        </div>
+                    </div>
+                    <h4>10. Creative Modern</h4>
+                </div>
+
+            </div>
+
+            <button class="slider-btn next-btn" onclick="scrollTemplates(320)">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- 3-STEP PROCESS SECTION -->
+    <section class="steps-section">
+        <div class="section-header">
+            <h2>Build Your Resume in <span class="gradient-text">3 Easy Steps</span></h2>
+            <p>Designed for fast and effective application creation</p>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>Choose a Template</h3>
+                <p>Select from over 10+ recruiter-approved ATS template layouts designed for modern roles.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>Fill in Details</h3>
+                <p>Enter your professional history, skills, education, and custom sections easily.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>Download PDF</h3>
+                <p>Instantly export your resume as an ATS-formatted PDF and start applying for jobs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ❓ FAQ SECTION -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Have Questions About Writing A Great Resume?</h2>
+            <p>Here are answers to common questions about ATS resumes and ResumeForge.</p>
+        </div>
+
+        <div class="faq-accordion-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What is an ATS-friendly resume?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>An ATS (Applicant Tracking System) friendly resume uses clean formatting, standard fonts, and simple layouts so hiring algorithms and recruiters can scan your technical skills and experience without parsing errors.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Is ResumeForge completely free to use?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! ResumeForge allows you to build, customize, and save your resume history completely free without hidden fees or credit card requirements.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Can I edit my saved resumes later?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely. Once logged in, go to your Profile page ("My Profile") to view all saved resumes and load them back into the editor with one click.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How can I download my resume as a PDF?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Inside the Builder dashboard (`index.html`), simply click on the "Download PDF" button to export a high-quality PDF ready for direct job applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span>⚡ <strong>ResumeForge</strong></span>
+                <span class="footer-copy">Created by <strong>Harsh Kumar Saini</strong> | © 2026 All Rights Reserved</span>
+            </div>
+            <div class="footer-badge">
+                <span class="green-dot"></span> ATS Standard Verified
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('authToken');
+            const navContainer = document.getElementById('nav-auth-actions');
+            const heroCtaContainer = document.getElementById('hero-cta-buttons');
+
+            if (token) {
+                navContainer.innerHTML = `
+                    <a href="index.html" class="btn-secondary">🏠 Builder</a>
+                    <a href="profile.html" class="btn-primary">👤 My Profile</a>
+                `;
+
+                heroCtaContainer.innerHTML = `
+                    <a href="index.html" class="btn-cta-primary">🚀 Create Resume Now</a>
+                    <a href="profile.html" class="btn-cta-secondary">📂 View Saved Resumes</a>
+                `;
+            } else {
+                navContainer.innerHTML = `
+                    <a href="login.html" class="btn-secondary">Sign In</a>
+                    <a href="signup.html" class="btn-primary">Get Started Free</a>
+                `;
+
+                heroCtaContainer.innerHTML = `
+                    <a href="signup.html" class="btn-cta-primary">Build My Resume Now ⚡</a>
+                    <a href="login.html" class="btn-cta-secondary">Log In to Account</a>
+                `;
+            }
+
+            // FAQ Accordion Toggle Script
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(q => {
+                q.addEventListener('click', () => {
+                    const item = q.parentElement;
+                    const isOpen = item.classList.contains('active');
+                    
+                    // Close all FAQs
+                    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+                    // Toggle clicked item
+                    if (!isOpen) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            // Arrow Control Functionality
+        function scrollTemplates(scrollOffset) {
+            const container = document.getElementById('templates-grid-container');
+            container.scrollBy({
+                left: scrollOffset,
+                behavior: 'smooth'
+            });
+        }
+
+        });
+    </script>
+</body>
+</html>

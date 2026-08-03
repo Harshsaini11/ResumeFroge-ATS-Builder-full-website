@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - ResumeForge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+
+    <script src="js/auth.js"></script>
+    <script>redirectIfLoggedIn();</script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="brand-icon">⚡</span>
+                <div class="brand-text">
+                    <h1>ResumeForge</h1>
+                    <p>Dynamic & ATS-Friendly Resume Builder</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="home.html" class="btn-theme-toggle" style="text-decoration: none;">🏠 Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card-box">
+            <div class="auth-header-title">
+                <h2>Create Account 🚀</h2>
+                <p>Join ResumeForge to build professional resumes</p>
+            </div>
+
+            <!-- STEP 1: NAME & EMAIL FORM -->
+            <form id="signup-step1">
+                <!-- Name Fields -->
+                <div class="auth-group">
+                    <label>First Name *</label>
+                    <input type="text" id="signup-first-name" class="auth-input" placeholder="First Name" required>
+                </div>
+
+                <div class="auth-group">
+                    <label>Middle Name (Optional)</label>
+                    <input type="text" id="signup-middle-name" class="auth-input" placeholder="Middle Name">
+                </div>
+
+                <div class="auth-group">
+                    <label>Last Name *</label>
+                    <input type="text" id="signup-last-name" class="auth-input" placeholder="Last Name" required>
+                </div>
+
+                <!-- Email Address -->
+                <div class="auth-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="signup-email" class="auth-input" placeholder="abc@gmail.com" required>
+                </div>
+
+                <!-- Terms & Conditions Checkbox -->
+                <div class="auth-flex-row" style="justify-content: flex-start; margin-bottom: 18px;">
+                    <label class="auth-checkbox-label">
+                        <input type="checkbox" id="signup-terms" required> 
+                        I agree to the <a href="#" class="auth-link">Terms & Conditions</a> & <a href="#" class="auth-link">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" id="send-otp-btn" class="auth-btn">Send Email OTP 📩</button>
+            </form>
+
+            <!-- STEP 2: OTP + PASSWORD SETUP FORM -->
+            <form id="signup-step2" style="display: none; margin-top: 15px;">
+                <p style="text-align: center; font-size: 13px; color: #475569; margin-bottom: 15px;">
+                    Enter 6-digit OTP sent to <strong id="display-otp-target"></strong> & set your password.
+                </p>
+                
+                <!-- OTP Input -->
+                <div class="auth-group">
+                    <label>Enter Verification OTP *</label>
+                    <input type="text" id="signup-otp" class="auth-input" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align: center; letter-spacing: 4px; font-weight: bold; font-size: 18px;" required>
+                </div>
+
+                <!-- Password -->
+                <div class="auth-group">
+                    <label>Create Password *</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="signup-pass" class="auth-input" placeholder="At least 8 chars (e.g. Pass@123)" required>
+                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('signup-pass', this)">👁️</span>
+                    </div>
+                    <small id="pass-rule-msg" style="display: block; margin-top: 4px; font-size: 11px; color: #64748b;">
+                        Must include Uppercase, Lowercase, Number & Special Character (min 8 chars).
+                    </small>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="auth-group">
+                    <label>Confirm Password *</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="signup-confirm-pass" class="auth-input" placeholder="Re-enter your password" required>
+                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('signup-confirm-pass', this)">👁️</span>
+                    </div>
+                    <small id="pass-mismatch-error" style="display: none; margin-top: 5px; font-size: 12px; font-weight: 700; color: #ef4444;"></small>
+                </div>
+
+                <button type="submit" id="verify-create-btn" class="auth-btn">Verify OTP & Create Account ✅</button>
+            </form>
+
+            <div style="text-align: center; margin: 18px 0; color: #94a3b8; font-size: 13px; font-weight: 600;">OR</div>
+
+            <!-- OFFICIAL GOOGLE SIGN-IN BUTTON -->
+            <div id="g_id_onload"
+                data-client_id="999999999999-sampleclientid.apps.googleusercontent.com"
+                data-callback="handleGoogleCredentialResponse"
+                data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="continue_with"
+                data-size="large"
+                data-logo_alignment="left"
+                data-width="100%">
+            </div>
+
+            <div class="auth-footer-text">
+                Already have an account? <a href="login.html" class="auth-link-bold">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let signupData = {};
+
+        const emailInput = document.getElementById('signup-email');
+        const submitBtn = document.getElementById('send-otp-btn');
+        const passInput = document.getElementById('signup-pass');
+        const confirmPassInput = document.getElementById('signup-confirm-pass');
+        const mismatchError = document.getElementById('pass-mismatch-error');
+
+        function checkPasswordMatch() {
+            const pass = passInput.value;
+            const confirmPass = confirmPassInput.value;
+
+            if (!confirmPass) {
+                mismatchError.style.display = 'none';
+                return true;
+            }
+
+            if (pass !== confirmPass) {
+                mismatchError.style.display = 'block';
+                mismatchError.innerText = '❌ Passwords do not match!';
+                confirmPassInput.style.borderColor = '#ef4444';
+                return false;
+            } else {
+                mismatchError.style.display = 'none';
+                confirmPassInput.style.borderColor = '#22c55e';
+                return true;
+            }
+        }
+
+        passInput.addEventListener('input', checkPasswordMatch);
+        confirmPassInput.addEventListener('input', checkPasswordMatch);
+
+        function isStrongPassword(pass) {
+            return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/.test(pass);
+        }
+
+        // STEP 1: Details Submit -> Send OTP
+        document.getElementById('signup-step1').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const firstName = document.getElementById('signup-first-name').value.trim();
+            const middleName = document.getElementById('signup-middle-name').value.trim();
+            const lastName = document.getElementById('signup-last-name').value.trim();
+
+            signupData = {
+                fullName: [firstName, middleName, lastName].filter(Boolean).join(' '),
+                email: emailInput.value.trim()
+            };
+
+            submitBtn.innerText = "Sending OTP...";
+            submitBtn.disabled = true;
+
+            const success = await sendOtpToEmail(signupData.email, 'signup');
+            submitBtn.innerText = 'Send Email OTP 📩';
+            submitBtn.disabled = false;
+
+            if (success) {
+                document.getElementById('signup-step1').style.display = 'none';
+                document.getElementById('signup-step2').style.display = 'block';
+                document.getElementById('display-otp-target').innerText = signupData.email;
+            }
+        });
+
+        // STEP 2: OTP + Password Submit -> Verify & Create Account
+        document.getElementById('signup-step2').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const otpCode = document.getElementById('signup-otp').value.trim();
+            const pass = passInput.value;
+
+            if (!isStrongPassword(pass)) {
+                alert('⚠️ Password weak hai! Include:\n- Minimum 8 Characters\n- 1 Uppercase Letter (A-Z)\n- 1 Lowercase Letter (a-z)\n- 1 Number (0-9)\n- 1 Special Character (@, #, $, %, etc.)');
+                return;
+            }
+
+            if (!checkPasswordMatch()) return;
+
+            const verifyBtn = document.getElementById('verify-create-btn');
+            verifyBtn.innerText = "Creating Account...";
+            verifyBtn.disabled = true;
+
+            await handleSignUpWithOtp(signupData.fullName, signupData.email, pass, otpCode);
+            
+            verifyBtn.innerText = "Verify OTP & Create Account ✅";
+            verifyBtn.disabled = false;
+        });
+    </script>
+</body>
+</html>
