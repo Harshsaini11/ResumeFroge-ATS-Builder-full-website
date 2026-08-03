@@ -19,7 +19,7 @@ function togglePasswordVisibility(inputId, eyeSpan) {
 
 function protectIndexPage() {
     const token = localStorage.getItem('authToken');
-    if (!token) window.location.replace('login.html');
+    if (!token) window.location.replace('home.html');
 }
 
 function redirectIfLoggedIn() {
