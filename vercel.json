@@ -1,12 +1,6 @@
 {
-  "routes": [
-    {
-      "src": "/$",
-      "dest": "/client/home.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/client/$1"
-    }
+  "rewrites": [
+    { "source": "/", "destination": "/client/home.html" },
+    { "source": "/(.*)", "destination": "/client/$1" }
   ]
 }
