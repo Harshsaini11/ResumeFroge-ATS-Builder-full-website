@@ -126,7 +126,6 @@
 
         <!-- SLIDER WRAPPER WITH ARROWS -->
         <div class="slider-wrapper">
-            <button class="slider-btn prev-btn" onclick="scrollTemplates(-320)">&#10094;</button>
 
             <!-- Cards Container (All 10 Real Content Templates) -->
             <div class="templates-grid" id="templates-grid-container">
@@ -384,8 +383,6 @@
                 </div>
 
             </div>
-
-            <button class="slider-btn next-btn" onclick="scrollTemplates(320)">&#10095;</button>
         </div>
     </section>
 
@@ -522,14 +519,6 @@
                     }
                 });
             });
-            // Arrow Control Functionality
-        function scrollTemplates(scrollOffset) {
-            const container = document.getElementById('templates-grid-container');
-            container.scrollBy({
-                left: scrollOffset,
-                behavior: 'smooth'
-            });
-        }
 
         });
     </script>
