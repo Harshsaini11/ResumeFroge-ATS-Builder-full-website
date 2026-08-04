@@ -18,6 +18,9 @@ body {
     color: var(--text-main);
     overflow-x: hidden;
     position: relative;
+    zoom: 90%;
+    -moz-transform: scale(0.9);
+    -moz-transform-origin: 0 0;
 }
 
 /* TOP ANNOUNCEMENT BAR */
