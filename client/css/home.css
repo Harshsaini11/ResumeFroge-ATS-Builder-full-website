@@ -59,6 +59,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #0f172a;
 }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand-icon {
@@ -68,8 +69,8 @@ body {
     border-radius: 8px;
     border: 1px solid #bfdbfe;
 }
-.brand-text h1 { font-size: 20px; font-weight: 800; color: var(--text-main); }
-.brand-text p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+.brand-text h1 { font-size: 20px; font-weight: 800; color: white; }
+.brand-text p { font-size: 11px; color: #94a3b8; font-weight: 600; }
 .nav-actions { display: flex; gap: 12px; }
 
 .btn-primary, .btn-secondary {
