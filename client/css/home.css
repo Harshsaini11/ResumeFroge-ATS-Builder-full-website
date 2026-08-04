@@ -64,10 +64,9 @@ body {
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand-icon {
     font-size: 22px;
-    background: #eff6ff;
+    background: rgba(255, 255, 255, 0.1);
     padding: 6px;
-    border-radius: 8px;
-    border: 1px solid #bfdbfe;
+    border-radius: 10px;
 }
 .brand-text h1 { font-size: 20px; font-weight: 800; color: white; }
 .brand-text p { font-size: 11px; color: #94a3b8; font-weight: 600; }
