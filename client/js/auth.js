@@ -1,7 +1,7 @@
 // Global API URL setup
 window.API_BASE = window.location.hostname === '' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:5000/api'
-    : 'https://resumefroge-ats-builder-full-website.onrender.com';
+    : 'https://resumefroge-ats-builder-full-website.onrender.com/api';
 
 const API_BASE = window.API_BASE;
 
