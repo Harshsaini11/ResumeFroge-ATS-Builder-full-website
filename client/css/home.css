@@ -45,7 +45,7 @@ body {
 
 /* NAVBAR */
 .navbar {
-    background: rgba(255, 255, 255, 0.9);
+    background: #0f172a;
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
