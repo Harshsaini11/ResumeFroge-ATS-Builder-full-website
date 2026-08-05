@@ -1,6 +1,3 @@
-const dns = require('dns');
-dns.setServers(['8.8.8.8', '8.8.4.4']); // Force Google DNS for Node.js
-
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -39,13 +36,18 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB Connected Successfully'))
 .catch((err) => console.error('MongoDB Connection Error:', err));
 
-// Nodemailer Transporter Setup
+// ✅ NODEMAILER TRANSPORTER FIXED FOR RENDER (Port 465 SSL)
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // SSL Connection required on Render
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000
 });
 
 // 1. SEND EMAIL OTP
@@ -83,15 +85,14 @@ app.post('/api/auth/send-otp', async (req, res) => {
             `
         };
 
-        transporter.sendMail(mailOptions)
-            .then(() => console.log(`✅ Mail successfully sent to ${cleanEmail}`))
-            .catch(err => console.error("❌ Background Mail Send Error:", err));
+        await transporter.sendMail(mailOptions);
+        console.log(`✅ Mail successfully sent to ${cleanEmail}`);
         
         return res.status(200).json({ message: `OTP has been sent to your Email (${cleanEmail})!` });
 
     } catch (err) {
         console.error("❌ Send OTP Error:", err);
-        return res.status(500).json({ message: 'Failed to send OTP.' });
+        return res.status(500).json({ message: 'Failed to send OTP: ' + err.message });
     }
 });
 
@@ -326,7 +327,6 @@ app.post('/api/auth/google-login', async (req, res) => {
         const { token } = req.body;
         if (!token) return res.status(400).json({ message: "Token is required!" });
 
-        // Decode JWT payload directly (No external client library needed)
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
@@ -337,11 +337,9 @@ app.post('/api/auth/google-login', async (req, res) => {
         const { email, name, picture } = payload;
         const cleanEmail = email.trim().toLowerCase();
 
-        // Check if user exists in MongoDB
         let user = await User.findOne({ email: cleanEmail });
 
         if (!user) {
-            // Auto Register new user via Google
             const dummyPassword = await bcrypt.hash(Math.random().toString(36), 10);
             user = new User({
                 fullName: name || 'Google User',
@@ -356,7 +354,6 @@ app.post('/api/auth/google-login', async (req, res) => {
             await user.save();
         }
 
-        // Create JWT App Token
         const authToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
         return res.status(200).json({
@@ -374,8 +371,9 @@ app.post('/api/auth/google-login', async (req, res) => {
         console.error("Google Auth Route Error:", err);
         return res.status(500).json({ message: "Google Auth failed: " + err.message });
     }
+});
 
-    // 📊 ADMIN ROUTE: Total Users & Resumes Count
+// 📊 ADMIN ROUTE: Total Users & Resumes Count
 app.get('/api/admin/stats', async (req, res) => {
     try {
         const totalUsers = await User.countDocuments();
@@ -392,9 +390,7 @@ app.get('/api/admin/stats', async (req, res) => {
     }
 });
 
-});
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Server running on http://127.0.0.1:${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
 });
