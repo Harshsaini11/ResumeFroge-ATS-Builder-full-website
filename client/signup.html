@@ -70,43 +70,52 @@
 
                 <button type="submit" id="send-otp-btn" class="auth-btn">Send Email OTP 📩</button>
             </form>
+            
 
-            <!-- STEP 2: OTP + PASSWORD SETUP FORM -->
-            <form id="signup-step2" style="display: none; margin-top: 15px;">
-                <p style="text-align: center; font-size: 13px; color: #475569; margin-bottom: 15px;">
-                    Enter 6-digit OTP sent to <strong id="display-otp-target"></strong> & set your password.
-                </p>
-                
-                <!-- OTP Input -->
-                <div class="auth-group">
-                    <label>Enter Verification OTP *</label>
-                    <input type="text" id="signup-otp" class="auth-input" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align: center; letter-spacing: 4px; font-weight: bold; font-size: 18px;" required>
-                </div>
+<!-- STEP 2: OTP + PASSWORD SETUP FORM -->
+<form id="signup-step2" style="display: none; margin-top: 15px;">
+    <p style="text-align: center; font-size: 13px; color: #475569; margin-bottom: 15px;">
+        Enter 6-digit OTP sent to <strong id="display-otp-target"></strong> & set your password.
+    </p>
+    
+    <!-- OTP Input -->
+    <div class="auth-group">
+        <label>Enter Verification OTP *</label>
+        <input type="text" id="signup-otp" class="auth-input" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align: center; letter-spacing: 4px; font-weight: bold; font-size: 18px;" required>
+    </div>
 
-                <!-- Password -->
-                <div class="auth-group">
-                    <label>Create Password *</label>
-                    <div class="password-input-wrapper">
-                        <input type="password" id="signup-pass" class="auth-input" placeholder="At least 8 chars (e.g. Pass@123)" required>
-                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('signup-pass', this)">👁️</span>
-                    </div>
-                    <small id="pass-rule-msg" style="display: block; margin-top: 4px; font-size: 11px; color: #64748b;">
-                        Must include Uppercase, Lowercase, Number & Special Character (min 8 chars).
-                    </small>
-                </div>
+    <!-- ✅ CREATE ACCOUNT RESEND OTP LINK -->
+    <p style="text-align: center; font-size: 13px; color: #64748b; margin: 10px 0 15px 0;">
+        Didn't receive the OTP? 
+        <a href="javascript:void(0)" id="signup-resend-btn" class="resend-link disabled" onclick="triggerSignupResendOtp()">
+            Resend OTP <span id="signup-timer">(30s)</span>
+        </a>
+    </p>
 
-                <!-- Confirm Password -->
-                <div class="auth-group">
-                    <label>Confirm Password *</label>
-                    <div class="password-input-wrapper">
-                        <input type="password" id="signup-confirm-pass" class="auth-input" placeholder="Re-enter your password" required>
-                        <span class="toggle-password-eye" onclick="togglePasswordVisibility('signup-confirm-pass', this)">👁️</span>
-                    </div>
-                    <small id="pass-mismatch-error" style="display: none; margin-top: 5px; font-size: 12px; font-weight: 700; color: #ef4444;"></small>
-                </div>
+    <!-- Password -->
+    <div class="auth-group">
+        <label>Create Password *</label>
+        <div class="password-input-wrapper">
+            <input type="password" id="signup-pass" class="auth-input" placeholder="At least 8 chars (e.g. Pass@123)" required>
+            <span class="toggle-password-eye" onclick="togglePasswordVisibility('signup-pass', this)">👁️</span>
+        </div>
+        <small id="pass-rule-msg" style="display: block; margin-top: 4px; font-size: 11px; color: #64748b;">
+            Must include Uppercase, Lowercase, Number & Special Character (min 8 chars).
+        </small>
+    </div>
 
-                <button type="submit" id="verify-create-btn" class="auth-btn">Verify OTP & Create Account ✅</button>
-            </form>
+    <!-- Confirm Password -->
+    <div class="auth-group">
+        <label>Confirm Password *</label>
+        <div class="password-input-wrapper">
+            <input type="password" id="signup-confirm-pass" class="auth-input" placeholder="Re-enter your password" required>
+            <span class="toggle-password-eye" onclick="togglePasswordVisibility('signup-confirm-pass', this)">👁️</span>
+        </div>
+        <small id="pass-mismatch-error" style="display: none; margin-top: 5px; font-size: 12px; font-weight: 700; color: #ef4444;"></small>
+    </div>
+
+    <button type="submit" id="verify-create-btn" class="auth-btn">Verify OTP & Create Account ✅</button>
+</form>
 
             <div style="text-align: center; margin: 18px 0; color: #94a3b8; font-size: 13px; font-weight: 600;">OR</div>
 
@@ -133,8 +142,9 @@
         </div>
     </div>
 
-    <script>
+<script>
         let signupData = {};
+        let signupTimerInterval = null;
 
         const emailInput = document.getElementById('signup-email');
         const submitBtn = document.getElementById('send-otp-btn');
@@ -170,6 +180,57 @@
             return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/.test(pass);
         }
 
+        // ⏱️ Create Account Resend Countdown Timer
+        function startSignupResendTimer(seconds) {
+            const resendBtn = document.getElementById('signup-resend-btn');
+            if (!resendBtn) return;
+
+            resendBtn.disabled = true;
+            resendBtn.classList.add('disabled');
+            let timeLeft = seconds;
+
+            clearInterval(signupTimerInterval);
+            signupTimerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(signupTimerInterval);
+                    resendBtn.innerHTML = `Resend OTP 🔄`;
+                    resendBtn.disabled = false;
+                    resendBtn.classList.remove('disabled');
+                } else {
+                    resendBtn.innerHTML = `Resend OTP <span id="signup-timer">(${timeLeft}s)</span>`;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+
+        // 🔄 Create Account Resend OTP Trigger Action
+        async function triggerSignupResendOtp() {
+            const resendBtn = document.getElementById('signup-resend-btn');
+            if (!resendBtn) return;
+
+            const displayElem = document.getElementById('display-otp-target');
+            const signupEmail = displayElem ? displayElem.innerText.trim() : "";
+
+            if (!signupEmail) {
+                alert("Email identify nahi ho raha hai.");
+                return;
+            }
+
+            resendBtn.innerText = "Sending...";
+            resendBtn.disabled = true;
+            resendBtn.classList.add('disabled');
+
+            const success = await sendOtpToEmail(signupEmail, 'signup');
+            
+            if (success) {
+                startSignupResendTimer(30);
+            } else {
+                resendBtn.innerText = "Resend OTP 🔄";
+                resendBtn.disabled = false;
+                resendBtn.classList.remove('disabled');
+            }
+        }
+
         // STEP 1: Details Submit -> Send OTP
         document.getElementById('signup-step1').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -194,6 +255,9 @@
                 document.getElementById('signup-step1').style.display = 'none';
                 document.getElementById('signup-step2').style.display = 'block';
                 document.getElementById('display-otp-target').innerText = signupData.email;
+                
+                // ✅ Step 2 open hone par timer yahan se chalega
+                startSignupResendTimer(30);
             }
         });
 
