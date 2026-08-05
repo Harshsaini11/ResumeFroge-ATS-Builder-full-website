@@ -1,6 +1,8 @@
 require('dotenv').config();
 const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first');
+if (dns.setDefaultResultOrder) {
+    dns.setDefaultResultOrder('ipv4first');
+}
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -20,6 +22,24 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 }));
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // Port 587 relies on STARTTLS
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    },
+    family: 4, // Explicitly force IPv4 connection
+    tls: {
+        rejectUnauthorized: false,
+        ciphers: 'SSLv3'
+    },
+    connectionTimeout: 20000, // Extended timeouts for cloud environments
+    greetingTimeout: 20000,
+    socketTimeout: 20000
+});
 
 app.use(express.json({ limit: '15mb' }));
 
