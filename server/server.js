@@ -33,9 +33,12 @@ app.get('/', (req, res) => {
 });
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 })
-    .then(() => console.log('✅ Connected to MongoDB Database'))
-    .catch(err => console.error('❌ DB Connection Error:', err));
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB Connected Successfully'))
+.catch((err) => console.error('MongoDB Connection Error:', err));
 
 // Nodemailer Transporter Setup
 const transporter = nodemailer.createTransport({
