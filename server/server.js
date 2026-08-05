@@ -58,20 +58,6 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB Connected Successfully'))
 .catch((err) => console.error('MongoDB Connection Error:', err));
 
-// ✅ NODEMAILER TRANSPORTER FIXED FOR RENDER (Port 465 SSL)
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // SSL Connection required on Render
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000
-});
-
 // 1. SEND EMAIL OTP
 app.post('/api/auth/send-otp', async (req, res) => {
     try {
