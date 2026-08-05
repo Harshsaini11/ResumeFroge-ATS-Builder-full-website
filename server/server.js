@@ -24,9 +24,9 @@ app.use(cors({
 }));
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // Port 587 relies on STARTTLS
+    host: '142.250.27.108',
+    port: 465,
+    secure: true, // Port 587 relies on STARTTLS
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -36,9 +36,9 @@ const transporter = nodemailer.createTransport({
         rejectUnauthorized: false,
         ciphers: 'SSLv3'
     },
-    connectionTimeout: 20000, // Extended timeouts for cloud environments
-    greetingTimeout: 20000,
-    socketTimeout: 20000
+    connectionTimeout: 15000, // Extended timeouts for cloud environments
+    greetingTimeout: 15000,
+    socketTimeout: 15000
 });
 
 app.use(express.json({ limit: '15mb' }));
