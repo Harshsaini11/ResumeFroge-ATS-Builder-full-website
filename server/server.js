@@ -58,7 +58,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB Connected Successfully'))
 .catch((err) => console.error('MongoDB Connection Error:', err));
 
-// 1. SEND EMAIL OTP
+// 1. SEND EMAIL OTP 
 app.post('/api/auth/send-otp', async (req, res) => {
     try {
         const { email, type } = req.body;
@@ -77,33 +77,46 @@ app.post('/api/auth/send-otp', async (req, res) => {
         const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
         otpStore.set(cleanEmail, { otp: generatedOtp, expiresAt: Date.now() + 5 * 60 * 1000 });
 
-        const mailOptions = {
-            from: `"ResumeForge Team" <${process.env.EMAIL_USER}>`,
-            to: cleanEmail,
-            subject: '⚡ ResumeForge - Verification Code',
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 500px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
-                    <h2 style="color: #2563eb; text-align: center;">ResumeForge Verification</h2>
-                    <p>Your security OTP code is:</p>
-                    <div style="text-align: center; margin: 20px 0;">
-                        <span style="font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #0f172a; background: #f1f5f9; padding: 10px 20px; border-radius: 8px;">${generatedOtp}</span>
+        // ✅ HTTPS Call on Port 443 (Render Timeout Infinite Fix)
+        const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'api-key': process.env.BREVO_API_KEY,
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                sender: { name: "ResumeForge Team", email: process.env.EMAIL_USER },
+                to: [{ email: cleanEmail }],
+                subject: '⚡ ResumeForge - Verification Code',
+                htmlContent: `
+                    <div style="font-family: Arial, sans-serif; max-width: 500px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
+                        <h2 style="color: #2563eb; text-align: center;">ResumeForge Verification</h2>
+                        <p>Your security OTP code is:</p>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <span style="font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #0f172a; background: #f1f5f9; padding: 10px 20px; border-radius: 8px;">${generatedOtp}</span>
+                        </div>
+                        <p style="font-size: 13px; color: #64748b;">Your OTP will expire in <b>5 minutes</b>.</p>
                     </div>
-                    <p style="font-size: 13px; color: #64748b;">Your OTP will expire in <b>5 minutes</b>.</p>
-                </div>
-            `
-        };
+                `
+            })
+        });
 
-        await transporter.sendMail(mailOptions);
-        console.log(`✅ Mail successfully sent to ${cleanEmail}`);
-        
-        return res.status(200).json({ message: `OTP has been sent to your Email (${cleanEmail})!` });
+        const result = await brevoResponse.json();
+
+        if (brevoResponse.ok) {
+            console.log(`✅ Mail successfully sent to ${cleanEmail}`);
+            return res.status(200).json({ message: `OTP has been sent to your Email (${cleanEmail})!` });
+        } else {
+            console.error("❌ Brevo API Error:", result);
+            return res.status(500).json({ message: 'Failed to send OTP via API.' });
+        }
 
     } catch (err) {
         console.error("❌ Send OTP Error:", err);
         return res.status(500).json({ message: 'Failed to send OTP: ' + err.message });
     }
 });
-
 // 2. SIGNUP WITH EMAIL OTP
 app.post('/api/auth/signup-with-otp', async (req, res) => {
     try {
