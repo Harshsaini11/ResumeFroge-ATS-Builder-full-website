@@ -84,7 +84,10 @@ app.post('/api/auth/send-otp', async (req, res) => {
             `
         };
 
-        await transporter.sendMail(mailOptions);
+        transporter.sendMail(mailOptions)
+            .then(() => console.log(`✅ Mail successfully sent to ${cleanEmail}`))
+            .catch(err => console.error("❌ Background Mail Send Error:", err));
+        
         return res.status(200).json({ message: `OTP has been sent to your Email (${cleanEmail})!` });
 
     } catch (err) {
